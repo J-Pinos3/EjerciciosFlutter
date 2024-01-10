@@ -16,7 +16,7 @@ void main() {
   print("Name: " + pokemon['name'] + "\nLife: ${pokemon['life']}" + "\nAbilities:");
   
   for(int i = 0; i < pokemon['abilities'].length; i++){
-    print("\t"+pokemon['abilities'][i]);
+    print("\t"+pokemon['abilities'][i].toUpperCase());
   }
   
   print("Back: ${ pokemon['sprites'][2] }");
