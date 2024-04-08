@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu_items/menu_items.dart';
 
+
 class HomeScreen extends StatelessWidget {
+  
+  static const String name = "home_screen";
+
   const HomeScreen({super.key});
 
   @override
@@ -19,9 +23,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HomeView extends StatelessWidget {
-  const _HomeView({
-    super.key,
-  });
+  const _HomeView();
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,8 @@ class _CustomListWidget extends StatelessWidget {
         
         //AHORA CON GO ROUTER
         context.push(menuItem.link);
+        //context.go(menuItem.link);
+        //context.pushNamed(CardsScreens.name);
       },
     );
   }
