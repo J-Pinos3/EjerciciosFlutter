@@ -31,6 +31,14 @@ const List<MenuItem> appMenuItems = [
 
 
     MenuItem(
+        title: "Progress Indicators", 
+        subTitle: "Generales y controlados", 
+        link: "/progress", 
+        icon: Icons.refresh_rounded
+    ),
+
+
+    MenuItem(
         title: "Comida", 
         subTitle: "Queremos comer", 
         link: "/food", 
