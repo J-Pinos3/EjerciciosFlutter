@@ -39,4 +39,15 @@ class AppTheme{
     );
   }
 
+
+  //it allows to copy an instance of the class
+  //if my current state changes I create a new one
+  AppTheme copyWith({
+    int? selectedColor,
+    bool? isDarkMode
+  })=> AppTheme(
+    selectedColor: selectedColor ?? this.selectedColor,
+    isDarkMode: isDarkMode ?? this.isDarkMode
+  );
+
 }
