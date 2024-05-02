@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 const Color _customColor = Color(0xff5c11d4);
 
-final List<Color> _colorThemes = [
+final List<Color> colorThemes = [
   _customColor,
   Colors.blue,
   Colors.teal,
@@ -18,18 +18,21 @@ final List<Color> _colorThemes = [
 class AppTheme{
 
   final int selectedColor;
+  final bool isDarkMode;
 
   AppTheme({
-    this.selectedColor = 0
+    this.selectedColor = 0,
+    this.isDarkMode = false
   }):assert(
-    selectedColor >= 0 && selectedColor < _colorThemes.length,
-    "Selected Color Must be between 0 and ${_colorThemes.length-1}"
+    selectedColor >= 0 && selectedColor < colorThemes.length,
+    "Selected Color Must be between 0 and ${colorThemes.length-1}"
     );
   
   ThemeData getTheme(){
     return ThemeData(
       useMaterial3: true,
-      colorSchemeSeed: _colorThemes[selectedColor],
+      brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      colorSchemeSeed: colorThemes[selectedColor],
       appBarTheme: const AppBarTheme(
         centerTitle: true
       )
