@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key});
+  const CustomBottomNavigationBar({super.key, required this.navigationShellStateful});
+
+  final StatefulNavigationShell navigationShellStateful;
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      onTap: (value) {
+        navigationShellStateful.goBranch(value);
+      },
+      currentIndex: navigationShellStateful.currentIndex,
       elevation: 1,
       items: const [//there must be more than 1 item
         BottomNavigationBarItem(
