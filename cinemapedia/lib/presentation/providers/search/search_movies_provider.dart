@@ -1,5 +1,4 @@
 
-import 'dart:html';
 
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/providers/movies/movies_repository_provider.dart';

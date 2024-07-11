@@ -115,7 +115,7 @@ class _Slide extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       //context.goNamed( MovieScreen.name, pathParameters: {'id':'${movie.id}'} );ALSO WORKS
-                      context.push('/movie/${movie.id}');
+                      context.push('/home/0/movie/${movie.id}');
                     },
                     child: FadeIn(child: child),
                   );
