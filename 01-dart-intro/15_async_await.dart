@@ -19,6 +19,7 @@ void main() async{
 //future es la promesa de que luego tendré un valor
 //async obliga a la función a deolver un future
 //await solo se usa con funciones asíncronas
+//await bloquea el hilo principal hasta que la función complete su ejecución.
 Future<String> httpGet(String url) async {
   
   await Future.delayed( const Duration(seconds: 2));

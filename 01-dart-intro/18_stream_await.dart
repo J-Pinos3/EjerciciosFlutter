@@ -1,10 +1,11 @@
 void main(){
-  
+  print("Inicio de main");
   //con async*, la función devuelve un stream
   emitNumbers()
     .listen( (int value){
       print("Stream value: $value");
     } );
+  print("Fin de main");
 }
 
 
