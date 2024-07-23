@@ -1,4 +1,4 @@
-import 'package:animate_do/animate_do.dart';
+import 'package:go_router/go_router.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class MoviesSlideshow extends StatelessWidget {
         scale: 0.9,
         autoplay: true,
         pagination: SwiperPagination(
-          margin: const EdgeInsets.only(top: 5, bottom: 0.1),
+          margin: const EdgeInsets.only(top: 0,),
           builder: DotSwiperPaginationBuilder(
             activeColor: colors.primary,
             color: colors.secondary
@@ -46,10 +46,7 @@ class _Slide extends StatelessWidget {
 
   final Movie movie;
 
-  const _Slide({
-    super.key,
-    required this.movie
-  });
+  const _Slide({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -59,33 +56,30 @@ class _Slide extends StatelessWidget {
       boxShadow: const [
         BoxShadow(
           color: Colors.black45,
-          blurRadius: 20,//difunidado
-          offset: Offset(0,10)
+          blurRadius: 10,
+          offset: Offset(0, 10)
         )
       ]
     );
 
+      
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only( bottom: 30 ),
       child: DecoratedBox(
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            movie.backdropPath,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if(loadingProgress != null){
-                return const DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.black12)
-                );
-              }
-
-              return FadeIn(child: child);
-            },
+          child: GestureDetector(
+            onTap: () => context.push('/home/0/movie/${ movie.id }'),
+            child: FadeInImage(
+              fit: BoxFit.cover,
+              placeholder: const NetworkImage('https://i.pinimg.com/originals/1b/29/83/1b29833236d23d01c32131ee326c2fb8.gif'),
+              image: NetworkImage(movie.backdropPath),
+            ),
           )
         )
       ),
     );
   }
 }
+

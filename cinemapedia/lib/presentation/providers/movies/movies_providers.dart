@@ -57,8 +57,9 @@ class MoviesNotifier extends StateNotifier<List<Movie>>{
 
   Future<void> loadNextPage() async{
     //isLoading is used for making multiple requests of a new page
-    if (isLoading)
+    if (isLoading) {
       return;
+    }
 
     isLoading = true;
     currentPage++;

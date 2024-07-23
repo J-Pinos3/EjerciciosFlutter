@@ -8,8 +8,9 @@ final initialLoadingProvider = Provider<bool>((ref){
   final step3 = ref.watch( upcomingMoviesProvider ).isEmpty;
   final step4 = ref.watch( topRatedMoviesProvider ).isEmpty;
 
-  if(step1 || step2 || step3 || step4 ) 
+  if(step1 || step2 || step3 || step4 ) {
     return true;//cargandose - está vacío
+  }
 
   return false;//tod0s estan llenos
 });

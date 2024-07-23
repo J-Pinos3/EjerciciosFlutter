@@ -1,4 +1,5 @@
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/domain/entities/video.dart';
 
 //repository calls the datasoyurce class
 //repos allows me to change data sources
@@ -15,4 +16,8 @@ abstract class MoviesRepository{
   Future<Movie>getMovieByID(String id);
 
   Future<List<Movie>> searchMovies(String query);
+
+  Future<List<Movie>> getSimilarMovies (int movieId);
+
+  Future<List<Video>> getYoutubeVideoById(int movieId );
 }

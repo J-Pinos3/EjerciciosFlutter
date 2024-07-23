@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
@@ -67,7 +66,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
             child:ListView.builder(
               controller: scrollController,
               scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: widget.movies.length,
               itemBuilder: (context, index) {
                 return FadeInRight(child: _Slide( movie: widget.movies[index], ));
@@ -81,7 +80,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
 }
 
 class _Slide extends StatelessWidget {
-  const _Slide({super.key, required this.movie});
+  const _Slide({required this.movie});
 
   final Movie movie;
 
@@ -165,7 +164,7 @@ class _Title extends StatelessWidget {
   final String? title;
   final String? subTitle;
 
-  const _Title({super.key, this.title, this.subTitle});
+  const _Title({this.title, this.subTitle});
 
   @override
   Widget build(BuildContext context) {

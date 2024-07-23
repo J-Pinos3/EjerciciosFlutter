@@ -26,7 +26,7 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>>{
     page++;
 
     //                    <int, Movie>{}
-    final tempMoviesMap = Map<int, Movie>();
+    final tempMoviesMap = <int, Movie>{};
     
     for (final movie in movies) {
       tempMoviesMap[movie.id] = movie;

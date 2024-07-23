@@ -1,6 +1,5 @@
 
 
-import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/providers/storage/favorites_movies_providers.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class FavoritesView extends ConsumerStatefulWidget {
   createState() => FavoritesViewState();
 }
 
-class FavoritesViewState extends ConsumerState<FavoritesView> {
+class FavoritesViewState extends ConsumerState<FavoritesView> with AutomaticKeepAliveClientMixin{
 
   bool isLastPage = false;
   bool isLoading = false;
@@ -43,6 +42,7 @@ class FavoritesViewState extends ConsumerState<FavoritesView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //final favoriteMovies = ref.watch(favoritesMoviesProviders);
     //WHAT  I DID
     //List<int>movieIds = [];
@@ -80,15 +80,15 @@ class FavoritesViewState extends ConsumerState<FavoritesView> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Favorites View"),
-      ),
       body: MovieMasonry(
         loadNextPage: loadNextPaage,
         movies: favoriteMovies
       )
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 

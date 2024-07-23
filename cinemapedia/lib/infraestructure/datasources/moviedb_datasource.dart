@@ -1,9 +1,12 @@
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/domain/entities/video.dart';
 import 'package:cinemapedia/infraestructure/mappers/movie_mapper.dart';
 import 'package:cinemapedia/infraestructure/models/moviedb/movie_details.dart';
 import 'package:cinemapedia/infraestructure/models/moviedb/moviedb_response.dart';
+import '../../infraestructure/mappers/video_mapper.dart';
+import '../../infraestructure/models/moviedb/moviedb_videos.dart';
 import 'package:dio/dio.dart';
 
 class MoviedbDatasource extends MoviesDatasource{
@@ -79,7 +82,7 @@ class MoviedbDatasource extends MoviesDatasource{
 
   @override
   Future<Movie> getMovieByID(String id) async {
-      final response = await dio.get('/movie/${id}' );
+      final response = await dio.get('/movie/$id' );
 
       if (response.statusCode != 200) { throw Exception("That movie does not exists.");  }
       final movieDBDetail = MovieDetails.fromJson(response.data);
@@ -103,6 +106,28 @@ class MoviedbDatasource extends MoviesDatasource{
 
 
     return _jsonToMovies(response.data);
+  }
+
+  
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId) async{
+    final response  = await dio.get("/movie/$movieId/similar"); 
+    return _jsonToMovies(response.data);
+  }
+
+  
+  @override
+  Future<List<Video>> getYoutubeVideoById(int movieId) async{
+    final response = await dio.get('/movie/$movieId/videos');
+    final moviedbVideosResponse = MoviedbVideosResponse.fromJson(response.data);
+    final videos = <Video>[];
+    for(final moviedbVideo in moviedbVideosResponse.results ){
+      if( moviedbVideo.site=='YouTube' ){
+        final video = VideoMapper.moviedbVideoToEntity(moviedbVideo);
+        videos.add(video);
+      }
+    }
+    return videos;
   }
 
   
