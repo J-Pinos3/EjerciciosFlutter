@@ -14,9 +14,7 @@ class CubitCounterScreen extends StatelessWidget {
 
 //*Toda esta vista ↓ tiene acceso al Counter Cubit
 class _CubitCounterView extends StatelessWidget {
-  const _CubitCounterView({
-    super.key,
-  });
+  const _CubitCounterView();
 
   //otra forma de incrementar los valores con read
   void IncreaseCounterBy(BuildContext ctx, [int value = 1]){
