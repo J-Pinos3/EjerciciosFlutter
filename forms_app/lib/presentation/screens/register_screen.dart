@@ -51,25 +51,18 @@ class _RegisterView extends StatelessWidget {
 
 
 
-class _RegisterForm extends StatefulWidget {
+class _RegisterForm extends StatelessWidget {
   const _RegisterForm();
 
-  @override
-  State<_RegisterForm> createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<_RegisterForm> {
-
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  //Register cubit already has the validation functionality
   @override
   Widget build(BuildContext context) {
 
     final registerCubit = context.watch<RegisterCubit>();
+    final username = registerCubit.state.username;
+    final password = registerCubit.state.password;
 
     return Form(
-      key: this._formKey,
       child: Column(
         children: [
 
@@ -77,7 +70,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             label: "Nombre de usuario",
             onChanged:(p0){
               registerCubit.usernameChanged(p0);
-              _formKey.currentState?.validate();
+              //_formKey.currentState?.validate();
             },
             //onChanged: (p0) { userName = p0; print("cambio: "+ p0.toString()); },
             onValidator:(p0) {
@@ -95,7 +88,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             label: "Correo electrónico",
             onChanged:(p0){
               registerCubit.emailChanged(p0);
-              _formKey.currentState?.validate();
+
             },
             onValidator:(p0) {
               if(p0 == null || p0.isEmpty) return "Campo requerido";
@@ -115,7 +108,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             obscure: true,
             onChanged:(p0){
               registerCubit.passwordChanged(p0);
-              _formKey.currentState?.validate();
+
             },
             onValidator:(p0) {
               if(p0 == null || p0.isEmpty) return "Campo requerido";
@@ -132,12 +125,14 @@ class _RegisterFormState extends State<_RegisterForm> {
             
             onPressed: () { 
 
+              /*
               final isValid = _formKey.currentState!.validate();
               if(!isValid){
                 //_formKey.currentState!.save();
                 //print("CREATE DATA Username: $userName Password: $password");
                 return;
               }
+              */
               
               registerCubit.onSubmit();
             },
