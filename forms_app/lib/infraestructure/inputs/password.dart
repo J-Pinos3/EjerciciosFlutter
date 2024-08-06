@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 enum PasswordError { empty, length }
 
 // Extend FormzInput and provide the input type and error type.
+                                //<value, error>
 class Password extends FormzInput<String, PasswordError> {
   // Call super.pure to represent an unmodified form input. initial value
   const Password.pure() : super.pure('');
@@ -11,6 +12,16 @@ class Password extends FormzInput<String, PasswordError> {
   // Call super.dirty to represent a modified form input. field has changed by user
   const Password.dirty( String value ) : super.dirty(value);
 
+  String? get errorMessage{
+    if(this.isValid || isPure){
+      return null;
+    }
+
+    if(displayError == PasswordError.empty){ return "El campo es requerido"; }
+    if(displayError == PasswordError.length){ return "Mínimo 6 caracteres"; }
+
+    return null;
+  }
 
   // Override validator to handle validating a given input value.
   @override
