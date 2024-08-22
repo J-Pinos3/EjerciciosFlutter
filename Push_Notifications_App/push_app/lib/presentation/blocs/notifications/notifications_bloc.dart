@@ -1,9 +1,11 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:push_app/config/local_notifications/local_notifications.dart';
 import 'package:push_app/domain/entities/push_message.dart';
 import 'package:push_app/firebase_options.dart';
 
@@ -20,13 +22,28 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async{
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  int pushNumberId = 0;
 
-  NotificationsBloc() : super(const NotificationsState()) {
+  //↓ function with no arguments that returns a Future<void>
+  final Future<void> Function()? requestLocalNotificationPermissions; 
+  final void Function({
+    required int id,
+    String? title,
+    String? body,
+    String? data,
+  })? showLocalNotification;
+
+  NotificationsBloc({
+    this.showLocalNotification,
+    this.requestLocalNotificationPermissions
+    }) : super(const NotificationsState()) {
 
     
     on<NotificationStatusChanged>( _notificationStatusChanged );
     
-    
+    ///todo 3 crear el listener _onPushMessage Received
+    on<NotificationReceived>(_onPushMessageReceived);
+
     _initalStatusCheck();
     _onForegroundMessage();
   }
@@ -41,6 +58,17 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     emit(
       state.copyWith(
         status: event.status
+      )
+    );
+    _getFCMToken();
+  }
+
+  void _onPushMessageReceived(NotificationReceived event, Emitter<NotificationsState> emit){
+
+
+    emit(
+      state.copyWith(
+        notifications: [ event.messageReceived, ...state.notifications ]
       )
     );
     _getFCMToken();
@@ -63,7 +91,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     print("token: $token");
   }
 
-  void _handleRemoteMessage( RemoteMessage message ) {
+  void handleRemoteMessage( RemoteMessage message ) {
 
     if(message.notification == null){
       return;
@@ -82,11 +110,23 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         : message.notification!.apple?.imageUrl ?? ""
     );
 
+    if( showLocalNotification != null ){
+      showLocalNotification!(
+        id: ++pushNumberId,//int.parse(  notification.messageId ),
+        title: notification.title,
+        body: notification.body,
+        data: notification.messageId
+
+      );
+    }
+
     print(notification);
+    add( NotificationReceived(notification) );
+    
   }
 
   void _onForegroundMessage(){
-    FirebaseMessaging.onMessage.listen( _handleRemoteMessage );
+    FirebaseMessaging.onMessage.listen( handleRemoteMessage );
   }
 
   void requestPermissions() async{
@@ -100,7 +140,24 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       sound: true,
     );
 
+    if(requestLocalNotificationPermissions != null){
+      await requestLocalNotificationPermissions!();
+      //await LocalNotifications.requestPermissionLocalNotifications();
+    }
+    
     add( NotificationStatusChanged(settings.authorizationStatus) );
     //settings.authorizationStatus;
+  }
+
+  PushMessage? getMessageById(String pushMessageId){
+    final exist = state.notifications.any((element) => element.messageId == pushMessageId  );
+
+    if( !exist ){
+      return null;
+    }
+    else{
+      return state.notifications.firstWhere((element) => element.messageId == pushMessageId);
+    }
+      
   }
 }

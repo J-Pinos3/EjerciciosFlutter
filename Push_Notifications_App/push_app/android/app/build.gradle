@@ -27,13 +27,9 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.reverb.push_app"
-    compileSdk flutter.compileSdkVersion
+    compileSdk 34
     ndkVersion flutter.ndkVersion
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -54,6 +50,17 @@ android {
         versionName flutterVersionName
     }
 
+    /*
+        compileOptions {
+
+            coreLibraryDesugaringEnabled true
+
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }    
+    */
+
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -67,4 +74,7 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+
+
+}

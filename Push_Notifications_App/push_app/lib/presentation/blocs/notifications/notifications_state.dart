@@ -9,6 +9,7 @@ class NotificationsState extends Equatable {
   final AuthorizationStatus status;
   final List<PushMessage> notifications;//create notifications model
   
+
   copyWith({
     AuthorizationStatus? status,
     List<PushMessage>? notifications    
