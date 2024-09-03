@@ -1,0 +1,32 @@
+UI IDEA
+
+https://deorwine.com/blog/cooking-food-recipe-mobile-app-development-cost-key-features/
+
+
+TODO:
+    
+
+    
+
+IN PROGRESS:
+    
+ 
+    10) Crear el provider para traer las recetas 'novedosas' por nombre en la capa de presentación        
+    
+
+COMPLETED:
+    1) Create custom bottom navigation bar
+    2) Implementar la navegación en el app router
+    3) Configurar el main.dart y añadir el apptheme y el app router
+    4) Crear las entidades para las recetas en la capa de dominio
+    5) Crear las 'interfaces' del datasource y del repository en la capa de dominio
+    6) En las interfaces RecipesDataSource y RecipesRepository 
+        añadir el método de traer las recetas random 'getRandomMeals' para un nombre de receta cualquiera
+    7)Crear los modelos de datos que se obtienen tras llamar a la API en la capa de infraestructura
+    8) Crear el mapper para pasar del FullRecipeResponse el FullRecipeEntity
+        y usarlo en reciperp_datasource al llamar a la API   
+    9) Crear la implementación de los métodos getRandomMeals en la capa infraestructure
+        tanto en el data source como en el repository        
+
+    
+ERRORS:
