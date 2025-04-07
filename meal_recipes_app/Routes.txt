@@ -5,15 +5,18 @@ https://deorwine.com/blog/cooking-food-recipe-mobile-app-development-cost-key-fe
 
 TODO:
     
-
-    
-
+    28) Actualizar el appbar con la barra de búsqueda
+    32) Crear el datasource y repository para la base de datos para los favoritos
 IN PROGRESS:
     
- 
-    10) Crear el provider para traer las recetas 'novedosas' por nombre en la capa de presentación        
     
+    25) EN el home_view, se debe eliminar el horizontal listview de las categorías,
+    ahí debe haber el search delegate para buscar por receta
 
+
+
+    
+    
 COMPLETED:
     1) Create custom bottom navigation bar
     2) Implementar la navegación en el app router
@@ -27,6 +30,28 @@ COMPLETED:
         y usarlo en reciperp_datasource al llamar a la API   
     9) Crear la implementación de los métodos getRandomMeals en la capa infraestructure
         tanto en el data source como en el repository        
-
+    10) Crear el provider para traer las recetas 'novedosas' ó recién vistas por nombre en la capa de presentación        
+    11) Configurar la vista home_view con los providers y un placeholder donde se mostrarán
+    las recetas
+    12) Crear un Custom App Bar
+    13) Crear la ui para mostrar las recetas de comida aleatorias (Recipes Vertical Listview)
+    14) El vertical listview debe ser usado en el tab de search
+    15) Crear el horizontal list view donde están las recetas novedosas
+    16) Crear el provider de comidas nuevas Random
+    17) Crear la entidade y mapper para el modelo de datos Categoría en la capa de dominio
+    18) En la capa de dominio crear el data source añadir el método para traer las categorías de comida
+    19) En la capa de dominio crear el repository añadir el método para traer las categorías de comida    
+    20) En la capa de presentación, crear el provider para las categorías
+    21) Crear el provider de las categorías con su método
+    22) Crear el widget para mostrar las categorías
+    23) crear el data source para obtener recetas por categoría en la capa de dominio
+    24) crear el repository para obtener recetas por categoría en la capa de dominio
     
+    26) Crear el search meal delegate
+    27) Crear el provider para buscar las comidas
+    28) En la capa de dominio, crear el repository y data source para obtener las 
+        recetas por su id
+    29) Crear el provider para las recetas por su id
+    30) Crear la pantalla de las recetas
+    31) Usar el provider de las recetas por id en la pantalla de las recetas
 ERRORS:

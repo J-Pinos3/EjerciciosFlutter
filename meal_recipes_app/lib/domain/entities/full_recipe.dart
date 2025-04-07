@@ -1,4 +1,11 @@
+import 'package:isar/isar.dart';
+
+part 'full_recipe.g.dart';
+
+@collection
 class FullRecipe{
+
+    Id? isarId;
 
     final  String dateModified;
     final  String idMeal ;

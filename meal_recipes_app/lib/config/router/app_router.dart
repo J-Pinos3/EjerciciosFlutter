@@ -22,7 +22,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: "/",
-              builder: (context, state) => const HomeView(),
+              builder: (context, state) =>  HomeView(),
               routes: [
                 GoRoute(
                   path: "recipe/:id",

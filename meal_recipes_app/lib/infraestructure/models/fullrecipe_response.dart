@@ -1,4 +1,4 @@
-import 'package:meal_recipes_app/infraestructure/models/fullrecipe_recipedb.dart';
+import 'package:meal_recipes_app/infraestructure/models/models.dart';
 
 class FullRecipeResponse {
     final List<FullRecipeDb> meals;
